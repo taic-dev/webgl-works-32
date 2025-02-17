@@ -40,6 +40,7 @@ export class Setup {
     const element = document.querySelector('.webgl');
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setSize(PARAMS.WINDOW.W, PARAMS.WINDOW.H);
+    this.renderer.setClearColor(new THREE.Color(0x00000))
     element?.appendChild(this.renderer.domElement);
   }
 
@@ -59,29 +60,28 @@ export class Setup {
       PARAMS.CAMERA.NEAR,
       PARAMS.CAMERA.FAR
     );
-    const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
-    const dist = window.innerHeight / 2 / Math.tan(fovRad);
-
-    this.camera.position.set(0, 0, dist);
+    // const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
+    // const dist = window.innerHeight / 2 / Math.tan(fovRad);
+    this.camera.position.set(0, 0, 2);
   }
 
   updateCamera() {
     if (!this.camera) return;
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera?.updateProjectionMatrix();
-    const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
-    const dist = window.innerHeight / 2 / Math.tan(fovRad);
-    this.camera.position.set(0, 0, dist);
+    // const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
+    // const dist = window.innerHeight / 2 / Math.tan(fovRad);
+    this.camera.position.set(0, 0, 2);
   }
 
   setDirectionalLight() {
     this.directionalLight = new THREE.DirectionalLight(0xfff0dd, 5);
-    this.directionalLight.position.set(0, 0, 10);
+    this.directionalLight.position.set(0, 10, 10);
     this.scene?.add(this.directionalLight);
   }
 
   setAmbientLight() {
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 10)
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 1)
     this.scene?.add(this.ambientLight);
   }
 

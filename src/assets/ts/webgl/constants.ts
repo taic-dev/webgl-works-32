@@ -13,7 +13,7 @@ export const PARAMS = {
   CAMERA: {
     FOV: 60,
     ASPECT: window.innerWidth / window.innerHeight,
-    NEAR: 1,
+    NEAR: 0.1,
     FAR: 1000,
     POSITION: {
       X: 0,
