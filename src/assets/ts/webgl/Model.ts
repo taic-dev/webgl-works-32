@@ -52,7 +52,7 @@ export class Model {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-      `${import.meta.env.BASE_URL}assets/model/astronaut.glb`,
+      `${import.meta.env.BASE_URL}assets/model/plane.glb`,
       (gltf) => {
         const model = gltf.scene;
 
