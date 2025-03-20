@@ -7,10 +7,6 @@ gsap.ticker.add(() => {
   webgl.render()
 });
 
-window.addEventListener('scroll', () => {
-  webgl.update()
-})
-
 window.addEventListener('resize', () => {
   webgl.resize()
 })

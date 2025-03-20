@@ -67,5 +67,6 @@ export class Space {
     (this.material as any).uniforms.uSpeed.value = this.setup.guiValue.speed;
     (this.material as any).uniforms.uAngle.value = this.setup.guiValue.angle;
     (this.material as any).uniforms.uInterval.value = this.setup.guiValue.interval;
+    (this.material as any).uniforms.uResolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight)
   }
 }

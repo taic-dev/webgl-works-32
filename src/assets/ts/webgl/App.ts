@@ -25,10 +25,6 @@ export class App {
     this.space.raf();
   }
 
-  update() {
-
-  }
-
   resize() {
     this.setup.resize();
     this.space.resize();

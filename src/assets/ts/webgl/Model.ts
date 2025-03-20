@@ -40,7 +40,6 @@ export class Model {
     this.material = new THREE.ShaderMaterial({
       uniforms: uniforms,
       side: THREE.DoubleSide,
-      wireframe: this.setup.guiValue.wireframe,
     });
   }
 
@@ -76,6 +75,5 @@ export class Model {
 
   raf() {
     if (!this.material) return;
-    this.material.wireframe = this.setup.guiValue.wireframe;
   }
 }
