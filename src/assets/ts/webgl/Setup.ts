@@ -33,7 +33,7 @@ export class Setup {
     this.setAmbientLight();
     this.setDirectionalLight();
     this.setGui();
-    this.setHelper();
+    // this.setHelper();
   }
 
   setRenderer() {
@@ -60,8 +60,6 @@ export class Setup {
       PARAMS.CAMERA.NEAR,
       PARAMS.CAMERA.FAR
     );
-    // const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
-    // const dist = window.innerHeight / 2 / Math.tan(fovRad);
     this.camera.position.set(0, 0, 2);
   }
 
@@ -69,8 +67,6 @@ export class Setup {
     if (!this.camera) return;
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera?.updateProjectionMatrix();
-    // const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
-    // const dist = window.innerHeight / 2 / Math.tan(fovRad);
     this.camera.position.set(0, 0, 2);
   }
 
@@ -88,11 +84,13 @@ export class Setup {
   setGui() {
     const gui = new GUI();
     this.guiValue = {
-      color: { r: 0.8314, g: 0.898, b: 1.0 },
-      wireframe: false,
+      speed: 1,
+      angle: 10,
+      interval: 1,
     };
-    gui.addColor(this.guiValue, "color")
-    gui.add(this.guiValue, "wireframe");
+    gui.add(this.guiValue, "speed", 0, 10, 0.1);
+    gui.add(this.guiValue, "angle", 0.1, 10, 0.1);
+    gui.add(this.guiValue, "interval", 1, 10, 0.1);
   }
 
 
