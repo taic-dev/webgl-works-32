@@ -5,6 +5,28 @@ import { EASING } from "../utils/constant";
 export const mouse = () => {
   const mouse = document.querySelector('.js-mouse-stalker');
 
+  document.body.addEventListener('mouseenter', (e: MouseEvent) => {
+    gsap.to(mouse, {
+      scale: 1,
+      opacity: 1,
+      webkitFilter: 'blur(0px)',
+      cursor: 'pointer',
+      ease: EASING.TRANSFORM,
+      duration: DURATION.SHORT
+    })
+  })
+
+  document.body.addEventListener('mouseleave', (e: MouseEvent) => {
+    gsap.to(mouse, {
+      scale: 2,
+      opacity: 0,
+      webkitFilter: 'blur(5px)',
+      cursor: 'default',
+      ease: EASING.TRANSFORM,
+      duration: DURATION.SHORT
+    })
+  })
+
   window.addEventListener('mousemove', (e: MouseEvent) => {
     gsap.to(mouse, {
       x: e.clientX,
@@ -19,7 +41,7 @@ export const mouse = () => {
       scale: 2,
       opacity: 0,
       webkitFilter: 'blur(5px)',
-      cursor: 'none',
+      cursor: 'default',
       ease: EASING.TRANSFORM,
       duration: DURATION.SHORT
     })

@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -19,6 +20,7 @@ export class Model {
   init() {
     this.setMaterial();
     this.setModel();
+    this.setAnimation();
   }
 
   setUniforms() {
@@ -73,7 +75,24 @@ export class Model {
     );
   }
 
+  setAnimation() {
+    gsap.fromTo(
+      this.modelGroup.position,
+      { 
+        y: -0.2,
+      },
+      {
+        y: -0.15,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+      }
+    );
+  }
+
   raf() {
     if (!this.material) return;
+    (this.material as any).uniforms.uTime.value += 0.01;
   }
 }
