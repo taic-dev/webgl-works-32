@@ -32,9 +32,9 @@ export class Space {
     };
 
     return {
-      uSpeed: { value: this.setup.guiValue.speed },
-      uAngle: { value: this.setup.guiValue.angle },
-      uInterval: { value: this.setup.guiValue.interval },
+      uSpeed: { value: 0.1 },
+      uAngle: { value: 10 },
+      uInterval: { value: 0 },
       ...commonUniforms
     }
   }
@@ -63,10 +63,7 @@ export class Space {
   }
 
   raf() {
-    (this.material as any).uniforms.uTime.value += 1 * 0.01;
-    (this.material as any).uniforms.uSpeed.value = this.setup.guiValue.speed;
-    (this.material as any).uniforms.uAngle.value = this.setup.guiValue.angle;
-    (this.material as any).uniforms.uInterval.value = this.setup.guiValue.interval;
+    if(window.isPlaying) (this.material as any).uniforms.uTime.value += 1 * 0.01;
     (this.material as any).uniforms.uResolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight)
   }
 }

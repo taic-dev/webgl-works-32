@@ -32,19 +32,21 @@ export class Setup {
     this.setCamera();
     this.setAmbientLight();
     this.setDirectionalLight();
-    this.setGui();
+    // this.setGui();
     // this.setHelper();
   }
 
   setRenderer() {
     const element = document.querySelector('.webgl');
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
-    this.renderer.setSize(PARAMS.WINDOW.W, PARAMS.WINDOW.H);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setClearColor(new THREE.Color(0x00000))
+    this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio, 1));
     element?.appendChild(this.renderer.domElement);
   }
 
   updateRenderer() {
+    console.log(window.innerWidth, window.innerHeight)
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
     this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio, 1));
   }
@@ -84,9 +86,9 @@ export class Setup {
   setGui() {
     const gui = new GUI();
     this.guiValue = {
-      speed: 1,
+      speed: 0.1,
       angle: 10,
-      interval: 1,
+      interval: 0,
     };
     gui.add(this.guiValue, "speed", 0, 10, 0.1);
     gui.add(this.guiValue, "angle", 0.1, 10, 0.1);

@@ -1,9 +1,13 @@
 import { gsap } from "gsap"
 import { App } from "./webgl/App";
-import { mouse } from "./modules/mouse";
+import { checkBrowser, checkSp } from "./utils/check";
+import { viewportReload } from "./utils/viewport";
 
-mouse();
+// utils
+checkSp();
+checkBrowser();
 
+// webgl
 const webgl = new App();
 webgl.init();
 gsap.ticker.add(() => {
@@ -12,4 +16,5 @@ gsap.ticker.add(() => {
 
 window.addEventListener('resize', () => {
   webgl.resize()
+  viewportReload();
 })

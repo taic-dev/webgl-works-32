@@ -15,3 +15,10 @@ export const DURATION = {
   BASE: 0.5,
   FULL: 2.0,
 };
+
+export const BREAK_POINT = {
+  SM: 430,
+  MD: 750,
+  LG: 1024,
+  XL: 1940
+}
