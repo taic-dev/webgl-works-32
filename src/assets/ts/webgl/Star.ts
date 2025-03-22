@@ -62,7 +62,7 @@ export class Star {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        if (xhr.total === xhr.total) {
+        if (xhr.total === xhr.loaded) {
           window.isLoadingStar = false;
           checkLoading();
         }
