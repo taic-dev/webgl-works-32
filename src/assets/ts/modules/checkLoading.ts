@@ -1,5 +1,5 @@
 export const checkLoading = () => {
-  if(!window.isLoadingSpaceship && !window.isLoadingStar) {
+  if(!window.isLoadingSpaceship && !window.isLoadingStar && !window.isLoadingMeteorite) {
     setTimeout(() => {
       document.body.classList.add('is-loaded');
       window.isLoading = false

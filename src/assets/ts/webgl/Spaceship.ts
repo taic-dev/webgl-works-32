@@ -40,7 +40,6 @@ export class Spaceship {
     const uniforms = this.setUniforms();
     this.material = new THREE.ShaderMaterial({
       uniforms: uniforms,
-      side: THREE.DoubleSide,
     });
   }
 

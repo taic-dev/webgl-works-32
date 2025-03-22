@@ -5,17 +5,20 @@ import { Spaceship } from "./Spaceship";
 import { Space } from "./Space";
 import { DURATION } from "./constants";
 import { Star } from "./Star";
+import { Meteorite } from "./Meteorite";
 
 export class Animation {
   setup: Setup;
   spaceship: Spaceship;
   star: Star
+  meteorite: Meteorite
   space: Space;
 
-  constructor(setup: Setup, spaceship: Spaceship, star: Star, space: Space) {
+  constructor(setup: Setup, spaceship: Spaceship, star: Star, meteorite: Meteorite, space: Space) {
     this.setup = setup;
     this.spaceship = spaceship;
     this.star = star
+    this.meteorite = meteorite;
     this.space = space;
   }
 
@@ -50,6 +53,10 @@ export class Animation {
     const star = this.star.modelGroup;
     const starScale = star.scale;
 
+    // meteorite
+    const firstMeteorites = this.meteorite.firstModels;
+    const secondsModels = this.meteorite.secondsModels;
+
     // space
     const interval = spaceMaterial.uInterval;
     const angle = spaceMaterial.uAngle;
@@ -60,7 +67,16 @@ export class Animation {
       y: -0.1,
       ease: EASING.TRANSFORM,
       duration: DURATION.BASE,
-    }).to(interval, {
+    }).add(() => {
+      firstMeteorites.forEach((v) => {
+        gsap.to(v.position, {
+          z: 5,
+          ease: EASING.TRANSFORM,
+          duration: 2,
+        })
+      })
+    })
+    .to(interval, {
       value: 0.8,
       ease: 'linear',
       duration: 1,
@@ -68,16 +84,57 @@ export class Animation {
       value: 0.1,
       ease: 'linear',
       duration: 2.,
-    }).to(spaceshipRotate, {
-      y: Math.PI / 10,
+    }, '-=1')
+        
+    .to(spaceshipRotate, {
+      y: Math.PI / -10,
       ease: EASING.TRANSFORM,
-      duration: 4,
-      delay: 1,
-    }, '-=1').to(speed, {
+      duration: 3.1,
+    })
+    
+    .add(() => {
+      secondsModels.forEach((v) => {
+        gsap.to(v.scale, {
+          x: 1.8,
+          y: 1.8,
+          z: 1.8,
+          ease: EASING.TRANSFORM,
+          duration: 3,
+          delay: 1
+        })
+      })
+
+      gsap.to(secondsModels[0].position, {
+        x: 1.08,
+        ease: EASING.TRANSFORM,
+        duration: 3,
+        delay: 1
+      })
+
+      gsap.to(secondsModels[1].position, {
+        x: -1.08,
+        ease: EASING.TRANSFORM,
+        duration: 3,
+        delay: 1
+      })
+    }, '-=3.5')
+
+    .add(() => {
+      secondsModels.forEach((v) => {
+        gsap.to(v.position, {
+          z: 5,
+          ease: EASING.TRANSFORM,
+          duration: 2,
+        })
+      })
+    })
+
+    .to(speed, {
       value: 100,
       ease: 'linear',
       duration: 1,
-    }).to(interval, {
+    }, '+=1' // slow time
+  ).to(interval, {
       value: 5,
       ease: 'linear',
       duration: 1,

@@ -6,6 +6,7 @@ import { viewportReload } from "./utils/viewport";
 // setting
 window.isLoadingSpaceship = true
 window.isLoadingStar = true
+window.isLoadingMeteorite = true
 window.isLoading = true
 window.isPlaying = false;
 

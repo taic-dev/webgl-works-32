@@ -3,6 +3,7 @@ interface Window {
   isPlaying: boolean
   isLoadingSpaceship: boolean
   isLoadingStar: boolean
+  isLoadingMeteorite: boolean
   isLoading: boolean
   isSp: boolean
 }
