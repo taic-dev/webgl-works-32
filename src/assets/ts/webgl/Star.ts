@@ -6,12 +6,10 @@ import { checkLoading } from "../modules/checkLoading";
 
 export class Star {
   setup: Setup;
-  material: THREE.ShaderMaterial | null;
   modelGroup: THREE.Group;
 
   constructor(setup: Setup) {
     this.setup = setup;
-    this.material = null;
     this.modelGroup = new THREE.Group();
   }
 
@@ -19,29 +17,7 @@ export class Star {
     this.setModel();
   }
 
-  setUniforms() {
-    const commonUniforms = {
-      uResolution: {
-        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
-      },
-      uMouse: { value: new THREE.Vector2(0, 0) },
-      uTime: { value: 0.0 },
-    };
-
-    return {
-      ...commonUniforms,
-    };
-  }
-
-  setMaterial() {
-    const uniforms = this.setUniforms();
-    this.material = new THREE.ShaderMaterial({
-      uniforms: uniforms,
-    });
-  }
-
   async setModel() {
-    this.setMaterial();
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
 
@@ -75,8 +51,6 @@ export class Star {
   }
 
   raf() {
-    if (!this.material) return;
-    (this.material as any).uniforms.uTime.value += 0.01;
     this.modelGroup.rotation.y += 0.0005;
   }
 }

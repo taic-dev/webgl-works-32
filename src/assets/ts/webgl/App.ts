@@ -36,8 +36,7 @@ export class App {
 
   render() {
     if(!this.setup.scene || !this.setup.camera) return
-    this.setup.renderer?.render(this.setup.scene, this.setup.camera)
-    this.spaceship.raf();
+    this.setup.renderer?.render(this.setup.scene, this.setup.camera);
     this.star.raf();
     this.space.raf();
 

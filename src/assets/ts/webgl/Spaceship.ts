@@ -6,41 +6,15 @@ import { checkLoading } from "../modules/checkLoading";
 
 export class Spaceship {
   setup: Setup;
-  light: THREE.PointLight | null;
-  material: THREE.ShaderMaterial | null;
   modelGroup: THREE.Group;
 
   constructor(setup: Setup) {
     this.setup = setup;
-    this.light = null;
-    this.material = null;
     this.modelGroup = new THREE.Group();
   }
 
   init() {
-    this.setMaterial();
     this.setModel();
-  }
-
-  setUniforms() {
-    const commonUniforms = {
-      uResolution: {
-        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
-      },
-      uMouse: { value: new THREE.Vector2(0, 0) },
-      uTime: { value: 0.0 },
-    };
-
-    return {
-      ...commonUniforms,
-    };
-  }
-
-  setMaterial() {
-    const uniforms = this.setUniforms();
-    this.material = new THREE.ShaderMaterial({
-      uniforms: uniforms,
-    });
   }
 
   async setModel() {
@@ -78,10 +52,5 @@ export class Spaceship {
         console.log(error);
       }
     );
-  }
-
-  raf() {
-    if (!this.material) return;
-    (this.material as any).uniforms.uTime.value += 0.01;
   }
 }

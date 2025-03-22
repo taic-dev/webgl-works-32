@@ -4,17 +4,17 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { checkLoading } from "../modules/checkLoading";
 
-type Model = THREE.Group<THREE.Object3DEventMap>
+type Model = THREE.Group<THREE.Object3DEventMap>;
 type Position = { x: number; y: number; z: number };
 type ModelInfo = {
-  size: number,
-  position: Position
-}
+  size: number;
+  position: Position;
+};
 
 export class Meteorite {
   setup: Setup;
-  material: THREE.ShaderMaterial | null;
   modelGroup: THREE.Group;
+  loader: GLTFLoader;
   firstModels: Model[];
   secondsModels: Model[];
   firstModelsInfo: ModelInfo[];
@@ -22,8 +22,12 @@ export class Meteorite {
 
   constructor(setup: Setup) {
     this.setup = setup;
-    this.material = null;
     this.modelGroup = new THREE.Group();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("/draco/");
+    this.loader = new GLTFLoader();
+    this.loader.setDRACOLoader(dracoLoader);
+
     this.firstModels = [];
     this.secondsModels = [];
     this.firstModelsInfo = [
@@ -38,86 +42,60 @@ export class Meteorite {
     ];
   }
 
-  init() {
+  async init() {
+    const baseModel = await this.loadMeteoriteModel();
     this.firstModelsInfo.forEach((v) => {
-      this.setModel(v, this.firstModels);
+      const clonedModel = baseModel.clone();
+      const modelGroup = this.addModelToScene(v, clonedModel)
+      this.firstModels.push(modelGroup);
     });
     this.secondsModelsInfo.forEach((v) => {
-      this.setModel(v, this.secondsModels);
+      const clonedModel = baseModel.clone();
+      const modelGroup = this.addModelToScene(v, clonedModel)
+      this.secondsModels.push(modelGroup);
     });
   }
 
-  setUniforms() {
-    const commonUniforms = {
-      uResolution: {
-        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
-      },
-      uMouse: { value: new THREE.Vector2(0, 0) },
-      uTime: { value: 0.0 },
-    };
-
-    return {
-      ...commonUniforms,
-    };
-  }
-
-  setMaterial() {
-    const uniforms = this.setUniforms();
-    this.material = new THREE.ShaderMaterial({
-      uniforms: uniforms,
-    });
-  }
-
-  setModel(info: ModelInfo, array: Model[]) {
-    this.setMaterial();
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco/");
-
-    const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
-
-    loader.load(
-      `${import.meta.env.BASE_URL}assets/model/meteorite.glb`,
-      (gltf) => {
-        const modelGroup = new THREE.Group();
-        const model = gltf.scene;
-        const box = new THREE.Box3().setFromObject(model);
-        const center = new THREE.Vector3();
-        box.getCenter(center);
-        model.position.sub(center);
-        modelGroup.add(model);
-        
-        array.push(modelGroup);
-
-        modelGroup.position.set(info.position.x, info.position.y, info.position.z);
-        modelGroup.scale.set(info.size, info.size, info.size);
-        this.setup.scene?.add(modelGroup);
-      },
-      (xhr) => {
-        const total = Math.max(xhr.total, xhr.loaded);
-        if (total === xhr.loaded) {
-          window.isLoadingMeteorite = false;
-          checkLoading();
+  loadMeteoriteModel() {
+    return new Promise<Model>((resolve) => {
+      this.loader.load(
+        `${import.meta.env.BASE_URL}assets/model/meteorite.glb`,
+        (gltf) => {
+          const model = gltf.scene;
+          resolve(model);
+        },
+        (xhr) => {
+          const total = Math.max(xhr.total, xhr.loaded);
+          if (total === xhr.loaded) {
+            window.isLoadingMeteorite = false;
+            checkLoading();
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      );
+    });
+  }
+
+  addModelToScene(info: ModelInfo, model: Model) {
+    const modelGroup = new THREE.Group();
+    modelGroup.add(model);
+    modelGroup.position.set(info.position.x, info.position.y, info.position.z);
+    modelGroup.scale.set(info.size, info.size, info.size);
+    this.setup.scene?.add(modelGroup);
+    return modelGroup
   }
 
   raf() {
-    if (!this.material) return;
-    (this.material as any).uniforms.uTime.value += 0.01;
-
     this.firstModels.forEach((v) => {
       v.rotation.x += 0.0001;
       v.rotation.y += 0.0003;
     });
 
     this.secondsModels.forEach((v) => {
-      v.rotation.x += 0.0001;
-      v.rotation.y += 0.0003;
+      v.rotation.x += 0.0005;
+      v.rotation.y += 0.001;
     });
   }
 }
