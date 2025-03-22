@@ -19,7 +19,7 @@ export class App {
     this.space = new Space(this.setup);
     this.spaceship = new Spaceship(this.setup);
     this.star = new Star(this.setup);
-    this.meteorite = new Meteorite(this.setup)
+    this.meteorite =  new Meteorite(this.setup)
     this.animation = new Animation(this.setup, this.spaceship, this.star, this.meteorite, this.space);
     mouse(this.animation);
   }
@@ -28,7 +28,10 @@ export class App {
     this.spaceship.init();
     this.star.init();
     this.space.init();
-    this.meteorite.init();
+    
+    if(!window.isSp) {
+      this.meteorite.init();
+    }
   }
 
   render() {
@@ -37,7 +40,10 @@ export class App {
     this.spaceship.raf();
     this.star.raf();
     this.space.raf();
-    this.meteorite.raf();
+
+    if(!window.isSp) {
+      this.meteorite.raf();
+    }
   }
 
   resize() {

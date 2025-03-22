@@ -193,4 +193,105 @@ export class Animation {
       webkitFilter: 'blur(0px)',
     }, '+=0.5')
   }
+
+  spPlay() {
+    const tl = gsap.timeline();
+    const text = document.querySelector('.js-text-wrapper');
+    // spaceship
+    const spaceship = this.spaceship.modelGroup;
+    const spaceMaterial = (this.space.material as any).uniforms;
+    const spaceshipPosition = spaceship.position;
+    const spaceshipScale = spaceship.scale;
+    const spaceshipRotate = spaceship.rotation;
+    
+    // star
+    const star = this.star.modelGroup;
+    const starScale = star.scale;
+
+    // space
+    const interval = spaceMaterial.uInterval;
+    const angle = spaceMaterial.uAngle;
+    const speed = spaceMaterial.uSpeed;
+    gsap.killTweensOf(spaceshipPosition);
+
+    tl.to(spaceshipPosition, {
+      y: -0.1,
+      ease: EASING.TRANSFORM,
+      duration: DURATION.BASE,
+    }).to(interval, {
+      value: 0.8,
+      ease: 'linear',
+      duration: 1,
+    }, '<=').to(angle, {
+      value: 0.1,
+      ease: 'linear',
+      duration: 2.,
+    }).to(spaceshipRotate, {
+      y: Math.PI / 0.4,
+      ease: EASING.TRANSFORM,
+      duration: 4,
+      delay: 1,
+    }, '-=1').to(speed, {
+      value: 100,
+      ease: 'linear',
+      duration: 1,
+    }).to(interval, {
+      value: 5,
+      ease: 'linear',
+      duration: 1,
+    }, '+=1').to(spaceshipRotate, {
+      y: Math.PI / 0.4,
+      ease: EASING.TRANSFORM,
+      duration: 0.5,
+    }, '-=3').to(spaceshipPosition, {
+      x: -0.05,
+      ease: 'linear',
+      duration: 0.5,
+    }, '<=')
+    .to(spaceshipPosition, {
+      x: 0,
+      ease: 'linear',
+      duration: 0.5,
+    }, '<=0.1')
+    .to(spaceshipScale, {
+      x: 0,
+      y: 0,
+      z: 0,
+      ease: 'linear',
+      duration: 0.1,
+      delay: 0.5,
+    }).to(spaceshipPosition, {
+      x: 0,
+      y: 0,
+      ease: 'linear',
+      duration: 0.1,
+    }, '<=').to(interval, {
+      value: 0,
+      ease: 'linear',
+      duration: 0.1,
+      delay: 0.1
+    }, '<=').to(angle, {
+      value: 10,
+      ease: 'linear',
+      duration: 0.1,
+      delay: 0.1
+    }, '<=').to(speed, {
+      value: 0,
+      ease: 'linear',
+      duration: 0.1,
+      delay: 0.1,
+    }, '<=')
+    // star
+    .to(starScale, {
+      x: 2,
+      y: 2,
+      z: 2,
+      ease: 'linear',
+      duration: 0.1,
+    }, '<=')
+    .to(text, {
+      opacity: 1,
+      webkitFilter: 'blur(0px)',
+    }, '+=0.5')
+  }
 }

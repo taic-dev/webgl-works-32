@@ -52,6 +52,6 @@ export const mouse = (animation: Animation) => {
       ease: EASING.TRANSFORM,
       duration: DURATION.SHORT
     })
-    animation.play();
+    !window.isSp ? animation.play() : animation.spPlay();
   })
 }

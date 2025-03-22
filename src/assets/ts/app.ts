@@ -3,16 +3,16 @@ import { App } from "./webgl/App";
 import { checkBrowser, checkSp } from "./utils/check";
 import { viewportReload } from "./utils/viewport";
 
-// setting
-window.isLoadingSpaceship = true
-window.isLoadingStar = true
-window.isLoadingMeteorite = true
-window.isLoading = true
-window.isPlaying = false;
-
 // utils
 checkSp();
 checkBrowser();
+
+// setting
+window.isLoadingSpaceship = true
+window.isLoadingStar = true
+window.isLoadingMeteorite = !window.isSp
+window.isLoading = true
+window.isPlaying = false;
 
 // webgl
 const webgl = new App();

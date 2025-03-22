@@ -1,4 +1,4 @@
-export const checkLoading = () => {
+export const checkLoading = () => {  
   if(!window.isLoadingSpaceship && !window.isLoadingStar && !window.isLoadingMeteorite) {
     setTimeout(() => {
       document.body.classList.add('is-loaded');
