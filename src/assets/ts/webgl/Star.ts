@@ -62,8 +62,7 @@ export class Star {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        const load = (xhr.loaded / xhr.total) * 100;
-        if (load === 100) {
+        if (xhr.total === xhr.total) {
           window.isLoadingStar = false;
           checkLoading();
         }
