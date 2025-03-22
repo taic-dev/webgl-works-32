@@ -41,7 +41,7 @@
   background-color: rgba($color: $color-white, $alpha: 0.2);
   font-size: 14px;
   opacity: 0;
-  cursor: pointer;
+  cursor: default;
 
   @include sp {
     position: absolute;
@@ -58,6 +58,7 @@
 .is-loaded .mouse-stalker {
   transform: scale(1);
   opacity: 1;
+  cursor: pointer;
 }
 
 .mouse-stalker-text {

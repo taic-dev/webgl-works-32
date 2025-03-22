@@ -70,6 +70,7 @@ export class Spaceship {
       },
       (xhr) => {
         const load = (xhr.loaded / xhr.total) * 100;
+        console.log((xhr.loaded / xhr.total) * 100)
         if (load === 100) {
           window.isLoadingSpaceship = false;
           checkLoading();
