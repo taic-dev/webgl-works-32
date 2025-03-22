@@ -29,9 +29,9 @@ export class App {
     this.star.init();
     this.space.init();
     
-    if(!window.isSp) {
+    // if(!window.isSp) {
       this.meteorite.init();
-    }
+    // }
   }
 
   render() {
@@ -40,9 +40,9 @@ export class App {
     this.star.raf();
     this.space.raf();
 
-    if(!window.isSp) {
+    // if(!window.isSp) {
       this.meteorite.raf();
-    }
+    // }
   }
 
   resize() {

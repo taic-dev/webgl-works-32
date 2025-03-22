@@ -10,7 +10,8 @@ checkBrowser();
 // setting
 window.isLoadingSpaceship = true
 window.isLoadingStar = true
-window.isLoadingMeteorite = !window.isSp
+// window.isLoadingMeteorite = !window.isSp
+window.isLoadingMeteorite = true
 window.isLoading = true
 window.isPlaying = false;
 
