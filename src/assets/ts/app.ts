@@ -3,6 +3,12 @@ import { App } from "./webgl/App";
 import { checkBrowser, checkSp } from "./utils/check";
 import { viewportReload } from "./utils/viewport";
 
+// setting
+window.isLoadingSpaceship = true
+window.isLoadingStar = true
+window.isLoading = true
+window.isPlaying = false;
+
 // utils
 checkSp();
 checkBrowser();

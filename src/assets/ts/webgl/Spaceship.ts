@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { checkLoading } from "../modules/checkLoading";
 
 export class Spaceship {
   setup: Setup;
@@ -67,7 +68,13 @@ export class Spaceship {
         this.modelGroup.position.z = Math.PI / 6;
         this.setup.scene?.add(this.modelGroup);
       },
-      undefined,
+      (xhr) => {
+        const load = (xhr.loaded / xhr.total) * 100;
+        if (load === 100) {
+          window.isLoadingSpaceship = false;
+          checkLoading();
+        }
+      },
       (error) => {
         console.log(error);
       }

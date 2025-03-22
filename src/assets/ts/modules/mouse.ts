@@ -5,11 +5,10 @@ import { Animation } from "../webgl/Animation";
 
 export const mouse = (animation: Animation) => {
   const mouse = document.querySelector('.js-mouse-stalker');
-  window.isPlaying = false;
   animation.init();
 
   document.body.addEventListener('mouseenter', () => {
-    if (window.isPlaying || window.isSp) return;
+    if (window.isLoading || window.isPlaying || window.isSp) return;
     gsap.to(mouse, {
       scale: 1,
       opacity: 1,
@@ -21,7 +20,7 @@ export const mouse = (animation: Animation) => {
   })
 
   document.body.addEventListener('mouseleave', () => {
-    if (window.isPlaying || window.isSp) return;
+    if (window.isLoading || window.isPlaying || window.isSp) return;
     gsap.to(mouse, {
       scale: 2,
       opacity: 0,
@@ -32,7 +31,7 @@ export const mouse = (animation: Animation) => {
     })
   })
 
-  window.addEventListener('mousemove', (e: MouseEvent) => {
+  document.body.addEventListener('mousemove', (e: MouseEvent) => {
     if (window.isPlaying || window.isSp) return;
     gsap.to(mouse, {
       x: e.clientX,
@@ -43,7 +42,7 @@ export const mouse = (animation: Animation) => {
   })
 
   mouse?.addEventListener('click', () => {
-    if(window.isPlaying) return
+    if(window.isLoading || window.isPlaying) return
     window.isPlaying = true
     gsap.to(mouse, {
       scale: 2,

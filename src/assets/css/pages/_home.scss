@@ -13,6 +13,8 @@
   text-align: center;
   color:  $color-yellow;
   text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
+  user-select: none;
+  pointer-events: none;
 
   @include sp {
     font-size: rem(160);
@@ -28,7 +30,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  transform: translate(-50%, -50%) scale(2);
+  transform: translate(-50%, -50%) scale(1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +39,6 @@
   border-radius: 50%;
   color: $color-white;
   background-color: rgba($color: $color-white, $alpha: 0.2);
-  user-select: none;
   font-size: 14px;
   opacity: 0;
   cursor: pointer;
@@ -51,8 +52,12 @@
 
     width: 50px;
     height: 50px;
-    opacity: 1;
   }
+}
+
+.is-loaded .mouse-stalker {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .mouse-stalker-text {
@@ -60,4 +65,37 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  color: $color-yellow;
+  background-color: $color-black;
+  opacity: 1;
+  transition: opacity 1s $easing-transform;
+}
+
+.is-loaded .loading {
+  opacity: 0;
+}
+
+.loader {
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side, $color-yellow 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, $color-yellow);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: rotation 1s infinite linear;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes rotation{ 
+  100%{transform: rotate(1turn)}
 }
