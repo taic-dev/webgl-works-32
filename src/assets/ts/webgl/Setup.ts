@@ -66,7 +66,6 @@ export class Setup {
 
   updateCamera() {
     if (!this.camera) return;
-    // console.log(window.innerWidth, window.innerHeight, window.devicePixelRatio)
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera?.updateProjectionMatrix();
     this.camera.position.set(0, 0, 2);

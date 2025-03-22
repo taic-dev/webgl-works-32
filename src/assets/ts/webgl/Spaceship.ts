@@ -69,12 +69,7 @@ export class Spaceship {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        // console.log(xhr.total)
-        // console.log(xhr.loaded)
-
         const total = Math.max(xhr.total, xhr.loaded);
-        // const progress = (xhr.loaded / total) * 100;
-
         if (total === xhr.loaded) {
           window.isLoadingSpaceship = false;
           checkLoading();
