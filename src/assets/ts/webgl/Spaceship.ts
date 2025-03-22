@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { checkLoading, getFileSize } from "../modules/checkLoading";
+import { checkLoading } from "../modules/checkLoading";
 
 export class Spaceship {
   setup: Setup;
@@ -50,9 +50,6 @@ export class Spaceship {
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-
-    const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/model.glb`)
-    console.log(totalSize)
 
     loader.load(
       `${import.meta.env.BASE_URL}assets/model/model.glb`,
