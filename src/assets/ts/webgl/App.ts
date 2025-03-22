@@ -28,10 +28,7 @@ export class App {
     this.spaceship.init();
     this.star.init();
     this.space.init();
-    
-    // if(!window.isSp) {
-      this.meteorite.init();
-    // }
+    this.meteorite.init();
   }
 
   render() {
@@ -39,10 +36,7 @@ export class App {
     this.setup.renderer?.render(this.setup.scene, this.setup.camera);
     this.star.raf();
     this.space.raf();
-
-    // if(!window.isSp) {
-      this.meteorite.raf();
-    // }
+    this.meteorite.raf();
   }
 
   resize() {
