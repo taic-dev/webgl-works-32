@@ -41,18 +41,7 @@ export class Star {
   }
 
   setModel() {
-    this.setMaterial();
-
-    const scale = {
-      pc: { x: 2.5, y: 2.5, z: 2.5 },
-      sp: { x: 2, y: 2, z: 2 }
-    }
-
-    const position = {
-      pc: { x: 0.5, y: -0.3, z: 0 },
-      sp: {  }
-    }
-
+    this.setMaterial(); 
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
     const loader = new GLTFLoader();
