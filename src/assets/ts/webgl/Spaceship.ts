@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-// import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { checkLoading, getFileSize } from "../modules/checkLoading";
 
 export class Spaceship {
@@ -45,18 +45,18 @@ export class Spaceship {
   }
 
   async setModel() {
-    // const dracoLoader = new DRACOLoader();
-    // dracoLoader.setDecoderPath("/draco/");
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("/draco/");
 
     const loader = new GLTFLoader();
-    // loader.setDRACOLoader(dracoLoader);
+    loader.setDRACOLoader(dracoLoader);
 
     const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/model.glb`)
     console.log(totalSize)
 
     loader.load(
       `${import.meta.env.BASE_URL}assets/model/model.glb`,
-      (gltf) => {
+      async (gltf) => {
         const model = gltf.scene;
         const box = new THREE.Box3().setFromObject(model);
         const center = new THREE.Vector3();
@@ -72,8 +72,13 @@ export class Spaceship {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        console.log(xhr.loaded)
-        if (totalSize === xhr.loaded) {
+        // console.log(xhr.total)
+        // console.log(xhr.loaded)
+
+        const total = Math.max(xhr.total, xhr.loaded);
+        // const progress = (xhr.loaded / total) * 100;
+
+        if (total === xhr.loaded) {
           window.isLoadingSpaceship = false;
           checkLoading();
         }
