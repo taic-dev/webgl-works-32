@@ -1,4 +1,6 @@
 html {
+  width: 100%;
+  height: 100vh;
   font-size: vw(16);
   overflow-x: hidden;
   overscroll-behavior: none;
@@ -6,11 +8,16 @@ html {
 
 body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   font-size: rem(16);
   font-family: Secular One, sans-serif;
   color: $color-black;
   background-color: $color-black;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
 }
 
 img {
@@ -52,11 +59,21 @@ footer {
 }
 
 .webgl {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   display: flex;
   overflow: clip;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  /* z-index: -1; */
 }

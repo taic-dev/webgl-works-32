@@ -59,11 +59,12 @@ export class Model {
         box.getCenter(center);
         model.position.sub(center);
         this.modelGroup.add(model);
+        this.modelGroup.lookAt(new THREE.Vector3(Math.PI, 0, 0));
         this.modelGroup.scale.set(0.8, 0.8, 0.8);
-        this.modelGroup.rotateX(Math.PI / 30);
-        this.modelGroup.rotateY(Math.PI / 2);
-        this.modelGroup.position.setY(-0.2);
-        this.modelGroup.position.setZ(Math.PI / 6);
+        this.modelGroup.rotation.y = Math.PI / 2;
+        this.modelGroup.rotation.x = -1.5;
+        this.modelGroup.position.y = -0.2;
+        this.modelGroup.position.z = Math.PI / 6;
         this.setup.scene?.add(this.modelGroup);
       },
       undefined,

@@ -33,22 +33,21 @@ export class Setup {
     this.setAmbientLight();
     this.setDirectionalLight();
     // this.setGui();
-    // this.setHelper();
+    this.setHelper();
   }
 
   setRenderer() {
     const element = document.querySelector('.webgl');
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setClearColor(new THREE.Color(0x00000))
     this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
     element?.appendChild(this.renderer.domElement);
   }
 
   updateRenderer() {
-    console.log(window.innerWidth, window.innerHeight)
-    this.renderer?.setSize(window.innerWidth, window.innerHeight);
     this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+    this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
 
   setScene() {
@@ -67,6 +66,7 @@ export class Setup {
 
   updateCamera() {
     if (!this.camera) return;
+    // console.log(window.innerWidth, window.innerHeight, window.devicePixelRatio)
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera?.updateProjectionMatrix();
     this.camera.position.set(0, 0, 2);
