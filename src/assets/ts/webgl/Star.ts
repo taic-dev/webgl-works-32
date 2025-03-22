@@ -43,14 +43,14 @@ export class Star {
 
   async setModel() {
     this.setMaterial();
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco/");
+    // const dracoLoader = new DRACOLoader();
+    // dracoLoader.setDecoderPath("/draco/");
 
     const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
+    // loader.setDRACOLoader(dracoLoader);
 
     const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/star.glb`)
-    
+
     loader.load(
       `${import.meta.env.BASE_URL}assets/model/star.glb`,
       (gltf) => {

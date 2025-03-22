@@ -45,11 +45,11 @@ export class Spaceship {
   }
 
   async setModel() {
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco/");
+    // const dracoLoader = new DRACOLoader();
+    // dracoLoader.setDecoderPath("/draco/");
 
     const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
+    // loader.setDRACOLoader(dracoLoader);
 
     const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/model.glb`)
     console.log(totalSize)
