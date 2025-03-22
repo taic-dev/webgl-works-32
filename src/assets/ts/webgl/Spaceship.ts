@@ -52,7 +52,8 @@ export class Spaceship {
     loader.setDRACOLoader(dracoLoader);
 
     const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/model.glb`)
-    
+    console.log(totalSize)
+
     loader.load(
       `${import.meta.env.BASE_URL}assets/model/model.glb`,
       (gltf) => {
@@ -71,7 +72,6 @@ export class Spaceship {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        console.log(xhr.total)
         console.log(xhr.loaded)
         if (totalSize === xhr.loaded) {
           window.isLoadingSpaceship = false;
