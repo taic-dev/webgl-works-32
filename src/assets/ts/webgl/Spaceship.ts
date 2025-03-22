@@ -69,9 +69,6 @@ export class Spaceship {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100)
-        console.log(xhr.total)
-        console.log(xhr.loaded)
         if (xhr.total === xhr.loaded) {
           window.isLoadingSpaceship = false;
           checkLoading();
