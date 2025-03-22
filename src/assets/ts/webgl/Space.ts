@@ -41,7 +41,7 @@ export class Space {
     return {
       uSpeed: { value: 0.1 },
       uAngle: { value: 10 },
-      uInterval: { value: 0 },
+      uInterval: { value: 0.54 },
       ...commonUniforms,
     };
   }

@@ -1,3 +1,29 @@
+.text-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(40deg);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: rem(72);
+  text-align: center;
+  color:  $color-yellow;
+  text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
+
+  @include sp {
+    font-size: rem(160);
+  }
+}
+
+.blur {
+  opacity: 0;
+  filter: blur(5px);
+}
+
 .mouse-stalker {
   position: fixed;
   top: 0;
