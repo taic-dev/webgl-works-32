@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { checkLoading } from "../modules/checkLoading";
+import { checkLoading, getFileSize } from "../modules/checkLoading";
 
 export class Spaceship {
   setup: Setup;
@@ -44,13 +44,15 @@ export class Spaceship {
     });
   }
 
-  setModel() {
+  async setModel() {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
+    const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/model.glb`)
+    
     loader.load(
       `${import.meta.env.BASE_URL}assets/model/model.glb`,
       (gltf) => {
@@ -69,7 +71,9 @@ export class Spaceship {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        if (xhr.total === xhr.loaded) {
+        console.log(xhr.total)
+        console.log(xhr.loaded)
+        if (totalSize === xhr.loaded) {
           window.isLoadingSpaceship = false;
           checkLoading();
         }

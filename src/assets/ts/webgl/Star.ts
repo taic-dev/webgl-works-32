@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { checkLoading } from "../modules/checkLoading";
+import { checkLoading, getFileSize } from "../modules/checkLoading";
 
 export class Star {
   setup: Setup;
@@ -41,13 +41,16 @@ export class Star {
     });
   }
 
-  setModel() {
+  async setModel() {
     this.setMaterial();
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
+
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
+    const totalSize = await getFileSize(`${import.meta.env.BASE_URL}assets/model/star.glb`)
+    
     loader.load(
       `${import.meta.env.BASE_URL}assets/model/star.glb`,
       (gltf) => {
@@ -62,7 +65,7 @@ export class Star {
         this.setup.scene?.add(this.modelGroup);
       },
       (xhr) => {
-        if (xhr.total === xhr.loaded) {
+        if (totalSize === xhr.loaded) {
           window.isLoadingStar = false;
           checkLoading();
         }
