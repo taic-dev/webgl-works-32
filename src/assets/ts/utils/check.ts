@@ -33,7 +33,7 @@ export const checkBrowser = () => {
     body?.classList.add('browser-edge')
   } else if (userAgent.indexOf("line") != -1) {
     body?.classList.add('browser-line')
-  }else if (userAgent.indexOf("chrome") != -1) {
+  } else if (userAgent.indexOf("chrome") != -1) {
     body?.classList.add('browser-chrome')
   } else if (userAgent.indexOf("safari") != -1) {
     body?.classList.add('browser-safari')
@@ -45,3 +45,15 @@ export const checkBrowser = () => {
     body?.classList.add('browser-other')
   }
 };
+
+/**
+ * @description モデルの読み込みが完了したかどうか
+ */
+export const checkLoading = () => {  
+  if(!window.isLoadingSpaceship && !window.isLoadingStar && !window.isLoadingMeteorite) {
+    setTimeout(() => {
+      document.body.classList.add('is-loaded');
+      window.isLoading = false
+    }, 1000)
+  }
+}

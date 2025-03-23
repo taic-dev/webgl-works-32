@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Setup } from "./Setup";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { checkLoading } from "../modules/checkLoading";
+import { checkLoading } from "../utils/check";
 
 type Model = THREE.Group<THREE.Object3DEventMap>;
 type Position = { x: number; y: number; z: number };

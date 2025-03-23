@@ -49,9 +49,6 @@
     left: unset;
     right: 10px;
     bottom: 10px;
-
-    width: 50px;
-    height: 50px;
   }
 }
 
@@ -99,4 +96,8 @@
 
 @keyframes rotation{ 
   100%{transform: rotate(1turn)}
+}
+
+.is-loaded .loader {
+  animation-play-state: paused;
 }
