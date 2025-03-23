@@ -25,7 +25,7 @@ export class Spaceship {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-      `${import.meta.env.BASE_URL}assets/model/model.glb`,
+      `${import.meta.env.BASE_URL}assets/model/spaceship.glb`,
       async (gltf) => {
         const model = gltf.scene;
         const box = new THREE.Box3().setFromObject(model);
