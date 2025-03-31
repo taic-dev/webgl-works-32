@@ -81,7 +81,7 @@ export class Animation {
       ease: 'linear',
       duration: 1,
     }, '<=').to(angle, {
-      value: 0.01,
+      value: 0.08,
       ease: 'linear',
       duration: 2.,
     }, '-=1')

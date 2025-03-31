@@ -17,7 +17,7 @@ export class Space {
     this.setup = setup;
     this.mesh = null;
     this.material = null;
-    this.element = document.querySelector(".webgl");
+    this.element = document.querySelector(".js-mv");
   }
 
   init() {

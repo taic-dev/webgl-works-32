@@ -33,15 +33,14 @@ export class Setup {
     this.setAmbientLight();
     this.setDirectionalLight();
     // this.setGui();
-    this.setHelper();
+    // this.setHelper();
   }
 
   setRenderer() {
     const element = document.querySelector('.webgl');
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setClearColor(new THREE.Color(0x00000))
-    this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio, 1));
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(PARAMS.WINDOW.W, PARAMS.WINDOW.H);
     element?.appendChild(this.renderer.domElement);
   }
 
@@ -49,7 +48,7 @@ export class Setup {
     this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio, 1));
     this.renderer?.setSize(window.innerWidth, window.innerHeight);
   }
-
+  
   setScene() {
     this.scene = new THREE.Scene();
   }
