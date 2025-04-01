@@ -2,7 +2,7 @@ import { Spaceship } from "./Spaceship";
 import { Setup } from "./Setup";
 import { Space } from "./Space";
 import { Animation } from "./Animation";
-import { mouse } from "../modules/mouse";
+import { button } from "../modules/button";
 import { Star } from "./Star";
 import { Meteorite } from "./Meteorite";
 
@@ -21,7 +21,7 @@ export class App {
     this.star = new Star(this.setup);
     this.meteorite =  new Meteorite(this.setup)
     this.animation = new Animation(this.setup, this.spaceship, this.star, this.meteorite, this.space);
-    mouse(this.animation);
+    button(this.animation);
   }
 
   init() {
